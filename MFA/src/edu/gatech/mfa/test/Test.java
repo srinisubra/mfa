@@ -1,4 +1,4 @@
-package edu.gatech.mfa.core;
+package edu.gatech.mfa.test;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
