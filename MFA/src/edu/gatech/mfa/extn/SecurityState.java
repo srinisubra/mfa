@@ -2,12 +2,13 @@ package edu.gatech.mfa.extn;
 
 import java.util.Date;
 
+import edu.gatech.mfa.extn.otpemail.exception.InvalidNumberOfFactorException;
+
 public abstract class SecurityState {
 
 	private String id;
 	private String username;
 	private Date requestTime;
-	
 	private boolean isAuthenticated = false;
 	
 	public boolean isAuthenticated() {
@@ -35,5 +36,6 @@ public abstract class SecurityState {
 		this.requestTime = requestTime;
 	}
 	
-	public abstract Object getFactor(int factorNumber);
+	public abstract Object getFactor(int factorNumber) throws InvalidNumberOfFactorException;
+	public abstract void setFactor(int factorNumber,Object value) throws InvalidNumberOfFactorException;
 }

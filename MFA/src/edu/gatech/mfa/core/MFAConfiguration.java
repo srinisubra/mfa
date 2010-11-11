@@ -6,6 +6,12 @@ import edu.gatech.mfa.extn.MFAExtension;
 
 public class MFAConfiguration {
 
+	public MFAExtension getExtension() {
+		return extension;
+	}
+	public void setExtension(MFAExtension extension) {
+		this.extension = extension;
+	}
 	private Controller successController;
 	private Controller failureController;
 	private MFADataSource dataSource;
