@@ -21,6 +21,7 @@ public class MockParameterExtractor implements RequestParameterExtractor {
 		credential.setUsername(request.getParameter("username"));
 		credential.setFactor(0, request.getParameter("password"));
 		credential.setFactor(1, request.getParameter("token"));
+		credential.setRequestId(request.getParameter("requestId"));
 		
 		return credential;
 	}

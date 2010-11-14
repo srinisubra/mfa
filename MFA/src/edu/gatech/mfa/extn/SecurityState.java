@@ -36,6 +36,11 @@ public abstract class SecurityState {
 		this.requestTime = requestTime;
 	}
 	
+	public String toString()
+	{
+		return username + ":" + id;
+	}
+	
 	public abstract Object getFactor(int factorNumber) throws InvalidNumberOfFactorException;
 	public abstract void setFactor(int factorNumber,Object value) throws InvalidNumberOfFactorException;
 }

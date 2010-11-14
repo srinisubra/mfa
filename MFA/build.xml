@@ -10,7 +10,7 @@
 	<property name="dist" location="dist" />
 	<property name="lib" location="WebContent/WEB-INF/lib">
 	</property>
-
+	<property name="tomcat-webapp" location="C:\\Users\\ADMIN\\Documents\\Georgia Tech\\Practicum\\downloads\\apache-tomcat-7.0.2\\webapps"></property>
 	<fileset id="classpath.lib" dir="${lib}">
 		<exclude name="MFA.jar" />
 	</fileset>
@@ -52,7 +52,7 @@
 	</target>
 
 	<target name="deploy" depends="dist">
-		<copy file="${dist}/MFA.war" todir="C:\\Users\\ADMIN\\Documents\\Georgia Tech\\Practicum\\downloads\\apache-tomcat-7.0.2\\webapps">
+		<copy file="${dist}/MFA.war" todir="${tomcat-webapp}">
 		</copy>
 	</target>
 	<target name="clean" description="clean up">
