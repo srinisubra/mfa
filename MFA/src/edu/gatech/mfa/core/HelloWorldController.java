@@ -16,6 +16,7 @@ public class HelloWorldController implements Controller {
 	public ModelAndView handleRequest(HttpServletRequest arg0,
 			HttpServletResponse arg1) throws Exception {
 		System.out.println("Request received");
-		return new ModelAndView("helloWorld");
+		arg1.getWriter().write("Success!!");
+		return null;
 	}
 }

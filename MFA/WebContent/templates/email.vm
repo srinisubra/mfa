@@ -1,0 +1,4 @@
+Dear ${username}
+In order to authenticate yourself , please enter the following token on the login page 
+
+Token : ${otp}

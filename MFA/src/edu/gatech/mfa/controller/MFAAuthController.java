@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
@@ -17,6 +19,7 @@ import edu.gatech.mfa.extn.UserCredential;
 	public class MFAAuthController implements Controller {
 	private MFAConfiguration mfaConfiguration;
 	private MFAExtension extension;
+	private Log log = LogFactory.getLog(getClass());
 	
 	public MFAConfiguration getMfaConfiguration() {
 		return mfaConfiguration;

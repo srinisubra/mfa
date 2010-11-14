@@ -5,6 +5,6 @@ public class MFAUtils {
 	public static String generateRequestId(String username)
 	{
 		// TODO: to implement
-		return null;
+		return System.currentTimeMillis() + username;
 	}
 }

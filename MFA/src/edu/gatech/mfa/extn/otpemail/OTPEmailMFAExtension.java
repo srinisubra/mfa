@@ -6,10 +6,13 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.gatech.mfa.core.MFADataSource;
 import edu.gatech.mfa.core.MFAUserDetail;
+import edu.gatech.mfa.core.VelocityModelAndView;
 import edu.gatech.mfa.extn.MFAExtension;
 import edu.gatech.mfa.extn.RequestParameterExtractor;
 import edu.gatech.mfa.extn.SecurityState;
@@ -25,6 +28,7 @@ public class OTPEmailMFAExtension implements MFAExtension {
 	private Map<String, SecurityState> requestRegistry;
 	private RequestParameterExtractor requestParameterExtractor;
 	private EmailSender emailSender;
+	private Log log = LogFactory.getLog(getClass());
 	
 	
 	public EmailSender getEmailSender() {
@@ -97,7 +101,7 @@ public class OTPEmailMFAExtension implements MFAExtension {
 	}
 
 	@Override
-	public ModelAndView generateAuthPage(String username,
+	public VelocityModelAndView generateAuthPage(String username,
 			MFADataSource dataSource, String requestId) throws Exception {
 		MFAUserDetail userDetails = dataSource.getUser(username);
 		SecurityState securityState = createSecurityState(userDetails, requestId);
@@ -106,8 +110,9 @@ public class OTPEmailMFAExtension implements MFAExtension {
 		sendOTP(dataSource, securityState);
 		
 		Map<String, String> model = createModel(userDetails, requestId);
-		ModelAndView mav = new ModelAndView(authPageTemplate);
+		VelocityModelAndView mav = new VelocityModelAndView();
 		mav.addAllObjects(model);
+		mav.setTemplateName(authPageTemplate);
 		return mav;
 	}
 
@@ -115,7 +120,7 @@ public class OTPEmailMFAExtension implements MFAExtension {
 	{
 		String emailId = dataSource.getEmailId(securityState.getUsername());
 		String otp = (String) securityState.getFactor(1); // otp
-		emailSender.sendMail(emailId, otp);
+		emailSender.sendMail(securityState.getUsername(),emailId, otp);
 	}
 	public SecurityState createSecurityState(MFAUserDetail userDetails, String requestId) throws InvalidNumberOfFactorException
 	{

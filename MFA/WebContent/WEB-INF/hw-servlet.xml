@@ -8,25 +8,95 @@
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	
-
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<property name="suffix" value=".jsp" />
+	<bean id="otpEmailSender" class="edu.gatech.mfa.extn.otpemail.EmailSender"
+		init-method="init">
+		<property name="mailSender" ref="mailSender"></property>
+		<property name="templateMessage" ref="templateMessage"></property>
+		<property name="emailTemplateName" value="email.vm"></property>
+		<property name="velocityFactory" ref="velocityFactory"></property>
 	</bean>
 
-	<bean id="helloWorldController" class="edu.gatech.mfa.core.HelloWorldController" >
+	<bean id="parameterExtractor" class="edu.gatech.mfa.test.MockParameterExtractor"></bean>
+	<bean id="otpGenerator" class="edu.gatech.mfa.extn.otpemail.OTPGenerator"></bean>
+	<bean id="dataSource" class="edu.gatech.mfa.test.MockDataSource"></bean>
+	<bean id="successController" class="edu.gatech.mfa.test.MockSuccessController"></bean>
+	<bean id="failureController" class="edu.gatech.mfa.test.MockFailureController"></bean>
+	<bean id="checkUsernameFailedHandler" class="edu.gatech.mfa.core.InvalidUsernameActionHandler"></bean>
+
+	<bean id="emailotpExtension" class="edu.gatech.mfa.extn.otpemail.OTPEmailMFAExtension"
+		init-method="init">
+		<property name="authPageTemplate" value="authenticate.vm"></property>
+		<property name="generator" ref="otpGenerator"></property>
+		<property name="name" value="OTP via Email Extension"></property>
+		<property name="requestParameterExtractor" ref="parameterExtractor"></property>
+		<property name="emailSender" ref="otpEmailSender"></property>
 	</bean>
-	
-	<bean id="urlMappings" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+
+	<bean id="mfaConfiguration" class="edu.gatech.mfa.core.MFAConfiguration">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="failureController" ref="failureController"></property>
+		<property name="extension" ref="emailotpExtension"></property>
+	</bean>
+
+	<bean id="authController" class="edu.gatech.mfa.controller.MFAAuthController"
+		init-method="init">
+		<property name="mfaConfiguration" ref="mfaConfiguration"></property>
+	</bean>
+
+	<bean id="frontController" class="edu.gatech.mfa.controller.MFAFrontController"
+		init-method="init">
+		<property name="mfaConfiguration" ref="mfaConfiguration"></property>
+		<property name="onFailure" ref="checkUsernameFailedHandler"></property>
+		<property name="velocityFactory" ref="velocityFactory"></property>
+	</bean>
+
+
+
+	<bean id="urlMappings"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
-				<prop key="home.login">helloWorldController</prop>
-				
+				<prop key="checkUser">frontController</prop>
+				<prop key="mfaAuth">authController</prop>
 			</props>
 		</property>
 	</bean>
+
+	<!-- Email Settings -->
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="username" value="gatech.infs.lab.user.1@gmail.com" />
+		<property name="password" value="mfauser123" />
+		<property name="port" value="465" />
+		<property name="protocol" value="smtps" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtps.auth">true</prop>
+				<prop key="mail.smtps.starttls.enable">true</prop>
+				<prop key="mail.smtps.debug">true</prop>
+			</props>
+		</property>
+
+	</bean>
+
+
+	<bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="gatech.infs.lab.user.1@gmail.com" />
+		<property name="subject" value="Please authenticate yourself" />
+	</bean>
+
+	<!-- Velocity settings -->
+
+	<bean id="velocityFactory" class="edu.gatech.mfa.core.VelocityFactory"
+		init-method="init">
+		<property name="props">
+			<props>
+				<prop key="resource.loader">class</prop>
+				<prop key="class.resource.loader.class">org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+				</prop>
+			</props>
+		</property>
+	</bean>
+
 </beans>

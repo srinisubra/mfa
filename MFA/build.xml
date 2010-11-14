@@ -1,0 +1,64 @@
+<project name="MFA" default="dist" basedir=".">
+	<description>
+        Package and deploy
+    </description>
+	<!-- set global properties for this build -->
+	<property name="src" location="src" />
+	<property name="template" location="WebContent/templates">
+	</property>
+	<property name="build" location="build" />
+	<property name="dist" location="dist" />
+	<property name="lib" location="WebContent/WEB-INF/lib">
+	</property>
+
+	<fileset id="classpath.lib" dir="${lib}">
+		<exclude name="MFA.jar" />
+	</fileset>
+
+	<target name="init" depends="clean">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}" />
+		<mkdir dir="${dist}" />
+	</target>
+
+	<target name="compile" depends="init" description="compile the source ">
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac srcdir="${src}" destdir="${build}" >
+			<classpath>
+				<fileset refid="classpath.lib">
+				</fileset>
+			</classpath>
+		</javac>
+		<copy todir="${build}">
+			<fileset dir="${src}">
+				<include name="*.xml" />
+			</fileset>
+
+			<fileset dir="${template}">
+				<include name="*.vm" />
+			</fileset>
+		</copy>
+
+	</target>
+
+	<target name="dist" depends="compile" description="generate the distribution">
+
+		<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+		<jar jarfile="${lib}/MFA.jar" basedir="${build}"  />
+		<war destfile="${dist}/MFA.war" basedir="WebContent">
+		</war>
+	</target>
+
+	<target name="deploy" depends="dist">
+		<copy file="${dist}/MFA.war" todir="C:\\Users\\ADMIN\\Documents\\Georgia Tech\\Practicum\\downloads\\apache-tomcat-7.0.2\\webapps">
+		</copy>
+	</target>
+	<target name="clean" description="clean up">
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build}" failonerror="false" />
+		<delete dir="${dist}" failonerror="false" />
+	</target>
+</project>
+
