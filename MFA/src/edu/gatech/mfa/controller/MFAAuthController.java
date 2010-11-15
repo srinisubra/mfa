@@ -1,7 +1,5 @@
 package edu.gatech.mfa.controller;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,7 +12,6 @@ import org.springframework.web.servlet.mvc.Controller;
 import edu.gatech.mfa.core.AuthenticationResult;
 import edu.gatech.mfa.core.MFAConfiguration;
 import edu.gatech.mfa.extn.MFAExtension;
-import edu.gatech.mfa.extn.SecurityToken;
 import edu.gatech.mfa.extn.UserCredential;
 
 	public class MFAAuthController implements Controller {
