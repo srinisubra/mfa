@@ -59,13 +59,16 @@ public class MFAFrontController extends VelocityController{
 	protected VelocityModelAndView processRequest(HttpServletRequest request)
 			throws Exception {
 		String username = extension.getRequestParameterExtractor().getUsername(request);
+		log.info("Request received for username=[" + username + "]");
 		VelocityModelAndView mav = null;
 		if(mfaConfiguration.getDataSource().checkUser(username) == true)
 		{
+			log.info("User [" + username+"] exists on the system. processing login information ....");
 			mav = extension.generateAuthPage(username, mfaConfiguration.getDataSource(), MFAUtils.generateRequestId(username));
 		}
 		else
 		{
+			log.info("User [" + username+"] does not exist on the system. Redirecting to error page ...");
 			mav = onFailure.handleError(username,  mfaConfiguration.getDataSource());
 		}
 		return mav;

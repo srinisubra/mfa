@@ -10,12 +10,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.gatech.mfa.core.AuthenticationResult;
 import edu.gatech.mfa.core.MFADataSource;
 import edu.gatech.mfa.core.MFAUserDetail;
 import edu.gatech.mfa.core.VelocityModelAndView;
 import edu.gatech.mfa.extn.MFAExtension;
 import edu.gatech.mfa.extn.RequestParameterExtractor;
 import edu.gatech.mfa.extn.SecurityState;
+import edu.gatech.mfa.extn.SecurityToken;
 import edu.gatech.mfa.extn.TwoFactorSecurityState;
 import edu.gatech.mfa.extn.UserCredential;
 import edu.gatech.mfa.extn.otpemail.exception.InvalidNumberOfFactorException;
@@ -73,13 +75,29 @@ public class OTPEmailMFAExtension implements MFAExtension {
 	}
 
 	@Override
-	public boolean performMFA(UserCredential credential) throws Exception {
+	public AuthenticationResult performMFA(UserCredential credential) throws Exception {
+		AuthenticationResult result = new AuthenticationResult(false);
 		String requestId = credential.getRequestId();
 		SecurityState securityState = requestRegistry.remove(requestId);
-		if(securityState == null) return false;
+		if(securityState == null) return result;
 		boolean retVal = validateAllFactors(2, credential, securityState);
+		if(retVal == true)
+		{
+			SecurityToken token = createSecurityToken(securityState);
+			result.setSecurityToken(token);
+		}
+		result.setStatus(retVal);
+		return result;
+	}
+	
+	public SecurityToken createSecurityToken(SecurityState credential)
+	{
+		SecurityToken token = new SecurityToken();
+		token.setRequestId(credential.getId());
+		token.setRequestTime(new Date());
+		token.setUsername(credential.getUsername());
+		return token;
 		
-		return retVal;
 	}
 	
 	public boolean validateAllFactors(int count,UserCredential credential,SecurityState securityState) throws InvalidNumberOfFactorException
@@ -104,7 +122,9 @@ public class OTPEmailMFAExtension implements MFAExtension {
 	public VelocityModelAndView generateAuthPage(String username,
 			MFADataSource dataSource, String requestId) throws Exception {
 		MFAUserDetail userDetails = dataSource.getUser(username);
+		
 		SecurityState securityState = createSecurityState(userDetails, requestId);
+		log.info("Created securityState for username [" + username + "] = [" + securityState+"]");
 		requestRegistry.put(requestId, securityState);
 		
 		sendOTP(dataSource, securityState);

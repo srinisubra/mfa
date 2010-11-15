@@ -19,6 +19,12 @@ public abstract class UserCredential {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
+	public String toString()
+	{
+		return username + ":" + requestId;
+	}
+	
 	public abstract void setFactor(int factorNumber,Object factor)throws InvalidNumberOfFactorException;
 	public abstract Object getFactor(int factorNumber)throws InvalidNumberOfFactorException;
 }

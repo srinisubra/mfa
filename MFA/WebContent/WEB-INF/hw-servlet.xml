@@ -51,14 +51,33 @@
 		<property name="velocityFactory" ref="velocityFactory"></property>
 	</bean>
 
-
+	<bean id="requestInterceptor" class="edu.gatech.mfa.interceptor.RestrictedAccessInterceptor">
+		<property name="redirectURLInCaseOfRestrictedAccess" value="../login1.html"></property>
+	</bean>
 
 	<bean id="urlMappings"
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		
 		<property name="mappings">
 			<props>
 				<prop key="checkUser">frontController</prop>
 				<prop key="mfaAuth">authController</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="userController" class="edu.gatech.mfa.test.MockUserController" ></bean>
+	
+	<bean id="userDefinedUrlMappings"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="requestInterceptor"/>
+			</list>
+		</property>
+		<property name="mappings">
+			<props>
+				<prop key="home.app">userController</prop>
 			</props>
 		</property>
 	</bean>

@@ -92,6 +92,7 @@ public class EmailSender {
 		msg.setTo(emailId);
 		msg.setText(message);
 		mailSender.send(msg);
+		log.info("Email with otp sent to [" + emailId + "]");
 
 	}
 }

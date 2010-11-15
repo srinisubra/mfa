@@ -33,6 +33,8 @@ public class SecurityToken {
 	public void setRequestId(String requestId) {
 		this.requestId = requestId;
 	}
-	
-	
+	public String toString()
+	{
+		return username + ":" + requestId + ":" + requestTime + ":" + tokenId;
+	}
 }
