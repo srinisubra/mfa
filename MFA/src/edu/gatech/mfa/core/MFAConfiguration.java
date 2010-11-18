@@ -6,6 +6,8 @@ import edu.gatech.mfa.extn.MFAExtension;
 
 public class MFAConfiguration {
 
+	private static int DEFAULT_INACTIVE_SESSION_EXPRATION_TIME_SECONDS = 60 * 5;
+	
 	public MFAExtension getExtension() {
 		return extension;
 	}
@@ -16,9 +18,17 @@ public class MFAConfiguration {
 	private Controller failureController;
 	private MFADataSource dataSource;
 	private MFAExtension extension;
+	private int inactiveSessionExpirationTime = DEFAULT_INACTIVE_SESSION_EXPRATION_TIME_SECONDS;
 	
 	public Controller getSuccessController() {
 		return successController;
+	}
+	public int getInactiveSessionExpirationTime() {
+		return inactiveSessionExpirationTime;
+	}
+	public void setInactiveSessionExpirationTime(
+			int inactiveSessionExpirationTime) {
+		this.inactiveSessionExpirationTime = inactiveSessionExpirationTime;
 	}
 	public void setSuccessController(Controller successController) {
 		this.successController = successController;

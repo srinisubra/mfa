@@ -45,7 +45,7 @@ import edu.gatech.mfa.extn.UserCredential;
 			
 			log.info("Configuring session with securityToken [" + authResult.getSecurityToken() + "]");
 			session.setAttribute("securityToken",authResult.getSecurityToken());
-			
+			session.setMaxInactiveInterval(mfaConfiguration.getInactiveSessionExpirationTime());
 			return mfaConfiguration.getSuccessController().handleRequest(request, response);
 		}
 		else
