@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/layout_root"
+              android:orientation="horizontal"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:padding="10dp"
+              >
+     <ScrollView
+             android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+           >
+<AbsoluteLayout
+android:id="@+id/widget0"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+xmlns:android="http://schemas.android.com/apk/res/android"
+>
+
+    <ImageView android:id="@+id/imagelogo"
+			               android:layout_width="wrap_content"
+			               android:layout_height="fill_parent"
+			              android:layout_x="100px"
+							android:layout_y="10px"
+			               />
+<TextView
+android:id="@+id/uidlabel"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Username:"
+android:layout_x="50px"
+android:layout_y="127px"
+>
+</TextView>
+<EditText
+android:id="@+id/uidtext"
+android:layout_width="214px"
+android:layout_height="wrap_content"
+android:text=""
+android:textSize="18sp"
+android:layout_x="50px"
+android:layout_y="155px"
+>
+</EditText>
+<TextView
+android:id="@+id/pwlabel"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Password:"
+android:layout_x="50px"
+android:layout_y="228px"
+>
+</TextView>
+<EditText
+android:id="@+id/pwtext"
+android:layout_width="214px"
+android:layout_height="wrap_content"
+android:text=""
+android:password="true"
+android:textSize="18sp"
+android:layout_x="50px"
+android:layout_y="256px"
+>
+</EditText>
+<Button
+android:id="@+id/loginbutton"
+android:layout_width="102px"
+android:layout_height="wrap_content"
+android:text="Login"
+android:layout_x="108px"
+android:layout_y="331px"
+>
+</Button>
+</AbsoluteLayout>
+    
+ </ScrollView>  
+</LinearLayout>

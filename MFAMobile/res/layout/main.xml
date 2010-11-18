@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout
+android:id="@+id/widget0"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+xmlns:android="http://schemas.android.com/apk/res/android"
+>
+<Button
+android:id="@+id/barcode_auth"
+android:layout_width="177px"
+android:layout_height="55px"
+android:text="Barcode"
+android:layout_x="70px"
+android:layout_y="182px"
+>
+</Button>
+<Button
+android:id="@+id/id_auth"
+android:layout_width="177px"
+android:layout_height="55px"
+android:text="Unique Code"
+android:layout_x="70px"
+android:layout_y="105px"
+>
+</Button>
+<TextView
+android:id="@+id/title"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Please select below according to \ninstruction specified on the website"
+android:layout_x="40px"
+android:layout_y="28px"
+>
+</TextView>
+</AbsoluteLayout>
+
