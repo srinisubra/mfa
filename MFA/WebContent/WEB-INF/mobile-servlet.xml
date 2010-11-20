@@ -1,0 +1,89 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<bean id="parameterExtractor" class="edu.gatech.mfa.test.MockParameterExtractor"></bean>
+	<bean id="dataSource" class="edu.gatech.mfa.test.MockDataSource"></bean>
+	<bean id="successController" class="edu.gatech.mfa.test.MockSuccessController"></bean>
+	<bean id="failureController" class="edu.gatech.mfa.test.MockFailureController"></bean>
+	<bean id="checkUsernameFailedHandler" class="edu.gatech.mfa.core.InvalidUsernameActionHandler"></bean>
+	<bean id="mobileData" class="edu.gatech.mfa.extn.qrcodeauth.MobileData"></bean>
+
+	<bean id="qrCodeMobileExtension" class="edu.gatech.mfa.extn.qrcodeauth.QRCodeAuthExtension"
+		init-method="init">
+		<property name="authPageTemplate" value="qrcode.vm"></property>
+		<property name="name" value="Unique ID via QR code"></property>
+		<property name="requestParameterExtractor" ref="parameterExtractor"></property>
+		<property name="mobileData" ref="mobileData"></property>
+	</bean>
+
+	<bean id="mfaConfiguration" class="edu.gatech.mfa.core.MFAConfiguration">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="failureController" ref="failureController"></property>
+		<property name="successController" ref="successController"></property>
+		<property name="extension" ref="qrCodeMobileExtension"></property>
+	</bean>
+
+	<bean id="authController" class="edu.gatech.mfa.controller.MFAAuthController"
+		init-method="init">
+		<property name="mfaConfiguration" ref="mfaConfiguration"></property>
+	</bean>
+
+	<bean id="frontController" class="edu.gatech.mfa.controller.MFAFrontController"
+		init-method="init">
+		<property name="mfaConfiguration" ref="mfaConfiguration"></property>
+		<property name="onFailure" ref="checkUsernameFailedHandler"></property>
+		<property name="velocityFactory" ref="velocityFactory"></property>
+	</bean>
+
+	<bean id="requestInterceptor" class="edu.gatech.mfa.interceptor.RestrictedAccessInterceptor">
+		<property name="redirectURLInCaseOfRestrictedAccess" value="../login1.html"></property>
+	</bean>
+
+	<bean id="urlMappings"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		
+		<property name="mappings">
+			<props>
+				<prop key="checkUser">frontController</prop>
+				<prop key="mfaAuth">authController</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="userController" class="edu.gatech.mfa.test.MockUserController" ></bean>
+	
+	<bean id="userDefinedUrlMappings"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="requestInterceptor"/>
+			</list>
+		</property>
+		<property name="mappings">
+			<props>
+				<prop key="home.app">userController</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- Velocity settings -->
+
+	<bean id="velocityFactory" class="edu.gatech.mfa.core.VelocityFactory"
+		init-method="init">
+		<property name="props">
+			<props>
+				<prop key="resource.loader">class</prop>
+				<prop key="class.resource.loader.class">org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+</beans>
