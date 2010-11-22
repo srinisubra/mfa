@@ -10,8 +10,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
 
-import sun.org.mozilla.javascript.internal.ObjArray;
-
 import edu.gatech.mfa.core.AuthenticationResult;
 import edu.gatech.mfa.core.MFADataSource;
 import edu.gatech.mfa.core.MFAUserDetail;
@@ -22,7 +20,7 @@ import edu.gatech.mfa.extn.SecurityState;
 import edu.gatech.mfa.extn.SecurityToken;
 import edu.gatech.mfa.extn.TwoFactorSecurityState;
 import edu.gatech.mfa.extn.UserCredential;
-import edu.gatech.mfa.extn.otpemail.EmailSender;
+
 import edu.gatech.mfa.extn.otpemail.exception.InvalidNumberOfFactorException;
 
 public class QRCodeAuthExtension implements MFAExtension{
@@ -33,7 +31,7 @@ public class QRCodeAuthExtension implements MFAExtension{
 	
 	private Map<String, SecurityState> requestRegistry;
 	private RequestParameterExtractor requestParameterExtractor;
-	private EmailSender emailSender;
+
 	private MobileDataExtractor mobileData;
 	private Log log = LogFactory.getLog(getClass());
 	private String deviceID;
@@ -115,6 +113,7 @@ public class QRCodeAuthExtension implements MFAExtension{
 		
 		for(int i=0;i<count;i++)
 		{
+			log.info("Comparing credential[" + i + "] . Expected["+ securityState.getFactor(i) + "] found [" + credential.getFactor(i) + "]");
 			retVal = retVal & credential.getFactor(i).equals(securityState.getFactor(i));
 		}
 		return retVal;
@@ -149,7 +148,10 @@ public class QRCodeAuthExtension implements MFAExtension{
 	{
 		Object[] retVal = new Object[2];
 		retVal[0] = Long.toString(System.currentTimeMillis());
-		String qrCodeAuthHashKey = GenerateKey.GenerateUniqueID(mobileData.getDeviceID(userDetails.getUsername()), userDetails.getCredential(),(String)retVal[0] );
+		String deviceID = mobileData.getDeviceID(userDetails.getUsername());
+		String credential =  userDetails.getCredential();
+		String qrCodeAuthHashKey = GenerateKey.GenerateUniqueID(deviceID,credential,(String)retVal[0] );
+		log.info("OTP generated from deviceID=[" + deviceID + "] credential=[" + credential+ "] qrcode=[" + retVal[0].toString() + "]");
 		SecurityState securityState = new TwoFactorSecurityState();
 		securityState.setAuthenticated(false);
 		securityState.setFactor(0, userDetails.getCredential());

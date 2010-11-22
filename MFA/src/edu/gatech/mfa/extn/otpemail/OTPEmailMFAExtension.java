@@ -106,6 +106,7 @@ public class OTPEmailMFAExtension implements MFAExtension {
 		
 		for(int i=0;i<count;i++)
 		{
+			log.info("Comparing credential[" + i + "] . Expected["+ securityState.getFactor(i) + "] found [" + credential.getFactor(i) + "]");
 			retVal = retVal & credential.getFactor(i).equals(securityState.getFactor(i));
 		}
 		return retVal;

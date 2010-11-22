@@ -16,17 +16,17 @@
     </servlet-mapping -->
 	
 	<servlet>
-        <servlet-name>phoneFactor</servlet-name>
+        <servlet-name>mobile</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>phoneFactor</servlet-name>
-        <url-pattern>/phoneFactor/*</url-pattern>
+        <servlet-name>mobile</servlet-name>
+        <url-pattern>/mobile/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>phoneFactor</servlet-name>
+        <servlet-name>mobile</servlet-name>
         <url-pattern>/app/*</url-pattern>
     </servlet-mapping >
 	

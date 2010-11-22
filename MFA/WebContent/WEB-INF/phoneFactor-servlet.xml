@@ -29,7 +29,7 @@
 	</bean>
 
 	<bean id="mfaConfiguration" class="edu.gatech.mfa.core.MFAConfiguration">
-		<property name="dataSource" ref="dataSource"></property>
+		<property name="dataSource" ref="dbDataSource"></property>
 		<property name="failureController" ref="failureController"></property>
 		<property name="successController" ref="successController"></property>
 		<property name="extension" ref="phoneFactorMFAExtension"></property>
@@ -93,5 +93,15 @@
 			</props>
 		</property>
 	</bean>
+<!-- Database settings -->
+	<bean id="basicDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="url" value="jdbc:mysql://localhost:3306/webinfs"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value=""></property>
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+	</bean>
 
+	<bean id="dbDataSource" class="edu.gatech.mfa.test.DbDataSource" init-method="init">
+		<property name="dataSource" ref="basicDataSource"></property>
+	</bean>
 </beans>
