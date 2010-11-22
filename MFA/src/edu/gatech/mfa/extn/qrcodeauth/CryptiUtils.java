@@ -13,12 +13,16 @@ public class CryptiUtils {
 			byte[] data = pass.getBytes(); 
 			m.update(data,0,data.length);
 			BigInteger i = new BigInteger(1,m.digest());
-			return String.format("%1$032X", i);
+			
+			return i.toString(16);
         }
         catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
 	}
 	
+	public static void main(String[] args) {
+		getMD5Hash("asdasda");
+	}
 	
 }
