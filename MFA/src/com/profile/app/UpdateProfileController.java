@@ -23,13 +23,14 @@ public class UpdateProfileController extends VelocityController{
 	protected VelocityModelAndView processRequest(HttpServletRequest request)
 			throws Exception {
 		
-		Map<String,String> mapOfRequestParameters  = request.getParameterMap();
+		Map mapOfRequestParameters  = request.getParameterMap(); 
 		SecurityToken token = (SecurityToken) request.getSession().getAttribute("securityToken");
 		if(token == null) throw new Exception("Security Exception. Security Token not found in the session");
 		String username = token.getUsername();
 		log.info("Saving information for [" + username +"] " + mapOfRequestParameters );
-		profileDAO.save(username, mapOfRequestParameters);
+		int records = profileDAO.save(username, mapOfRequestParameters);
 		VelocityModelAndView mav = new VelocityModelAndView();
+		mav.addObject("records", new Integer(records));
 		mav.setTemplateName(updateProfileTemplateFile);
 		return mav;
 	}

@@ -76,4 +76,8 @@ public class DbDataSource implements MFADataSource {
 		return email;
 	}
 
+	public Map<String,Object> getAll(String username) throws Exception {
+		Map<String,Object>  record = template.queryForMap("select * from user_details where user_name = ?", new Object[]{username});
+		return record;
+	}
 }

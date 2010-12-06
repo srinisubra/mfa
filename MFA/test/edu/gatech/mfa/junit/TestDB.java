@@ -58,4 +58,7 @@ public class TestDB extends TestCase{
 		System.out.println(email);
 	}
 
+	public void testAll() throws Exception{ 
+		System.out.println(dbSource.getAll("nadir"));
+	}
 }
