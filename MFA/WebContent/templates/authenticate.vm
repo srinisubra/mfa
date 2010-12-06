@@ -6,8 +6,8 @@
 <title>MFA Service Demo</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<script type="text/javascript" src="templates/auth.js"></script>
-<link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript" src="../templates/auth.js"></script>
+<link href="../style.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 <body>
 <div id="header">

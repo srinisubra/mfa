@@ -77,8 +77,8 @@ function replaceButtonText(buttonId, text)
 				exchange(document.getElementById('cardnob'));
 				exchange(document.getElementById('cardlimitb'));
 				
-				alert(getquerystring());
-				
+				//alert(getquerystring());
+				xmlhttpPost('updateProfile');
 			}
 			
 		}
@@ -127,5 +127,6 @@ function getquerystring() {
 }
 
 function updatepage(str){
-    document.getElementById("result").innerHTML = str;
+   // document.getElementById("result").innerHTML = str;
+	alert('Response from the server ' + str);
 }

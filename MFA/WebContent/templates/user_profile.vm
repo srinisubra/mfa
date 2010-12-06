@@ -329,19 +329,19 @@ display:none;
 							Phone
 						</label>
 						<span>
-							<span id="phone13"> <script type="text/javascript"> document.write('$phone_no'.substring(0,2));</script> </span>
+							<span id="phone13"> $phone_no_1 </span>
 							<input id="phone13b" 			name="phone13b" 			type="text" 			class="replace" 			value="" 			size="3" 			maxlength="3" 			tabindex="9" 						/>
 							<label for="phone13">###</label>
 						</span>
 						<span class="symbol">-</span>
 						<span>
-							<span id="phone23"><script type="text/javascript"> document.write('$phone_no'.substring(3,5));</script> </span>
+							<span id="phone23"> $phone_no_2</span>
 							<input id="phone23b" 			name="phone23b" 			type="text" 			class="replace" 			value="" 			size="3" 			maxlength="3" 			tabindex="10" 						/>
 							<label for="phone23">###</label>
 						</span>
 						<span class="symbol">-</span>
 						<span>
-							<span id="phone34"><script type="text/javascript"> document.write('$phone_no'.substring(6,9));</script></span>
+							<span id="phone34"> $phone_no_3</span>
 							<input id="phone34b" 			name="phone34b" 			type="text" 			class="replace" 			value="" 			size="4" 			maxlength="4" 			tabindex="11" 						/>
 							<label for="phone34">####</label>
 						</span>
@@ -367,19 +367,19 @@ display:none;
 							Join Date
 						</label>
 						<span>
-							<span id="jdatem"> <script type="text/javascript"> document.write('$join_date'.substring(5,6));</script> </span>
+							<span id="jdatem"> $join_date_2 </span>
 							<input id="jdatemb" 			name="jdatemb" 			type="text" 			class="replace" 			value="" 			size="2" 			maxlength="2" 			tabindex="13" 						/>
 							<label for="jdatem">MM</label>
 						</span> 
 						<span class="symbol">/</span>
 						<span>
-							<span id="jdated"> <script type="text/javascript"> document.write('$join_date'.substring(8,9));</script> </span>
+							<span id="jdated"> $join_date_3 </span>
 							<input id="jdatedb" 			name="jdatedb" 			type="text" 			class="replace" 			value="" 			size="2" 			maxlength="2" 			tabindex="14" 						/>
 							<label for="jdatedb">DD</label>
 						</span>
 						<span class="symbol">/</span>
 						<span>
-							<span id="jdatey"> <script type="text/javascript"> document.write('$join_date'.substring(0,3));</script> </span>
+							<span id="jdatey">$join_date_1 </span>
 							<input id="jdateyb" 			name="jdateyb" 			type="text" 			class="replace" 			value="" 			size="4" 			maxlength="4" 			tabindex="15" 						/>
 							<label for="jdatey">YYYY</label>
 						</span>
@@ -391,19 +391,19 @@ display:none;
 							SSN
 						</label>
 						<span>
-							<span id="ssn13"> <script type="text/javascript"> document.write('$user_ssn'.substring(0,2));</script> </span>
+							<span id="ssn13"> $user_ssn_1 </span>
 							<input id="ssn13b" 			name="ssn13b" 			type="text" 			class="replace" 			value="" 			size="3" 			maxlength="3" 			tabindex="9" 						/>
 							<label for="ssn13">###</label>
 						</span>
 						<span class="symbol">-</span>
 						<span>
-							<span id="ssn23">  <script type="text/javascript"> document.write('$user_ssn'.substring(3,4));</script> </span>
+							<span id="ssn23"> $user_ssn_2 </span>
 							<input id="ssn23b" 			name="ssn23b" 			type="text" 			class="replace" 			value="" 			size="3" 			maxlength="2" 			tabindex="10" 						/>
 							<label for="ssn23">##</label>
 						</span>
 						<span class="symbol">-</span>
 						<span>
-							<span id="ssn34"> <script type="text/javascript"> document.write('$user_ssn'.substring(5,8));</script></span>
+							<span id="ssn34">$user_ssn_3</span>
 							<input id="ssn34b" 			name="ssn34b" 			type="text" 			class="replace" 			value="" 			size="4" 			maxlength="4" 			tabindex="11" 						/>
 							<label for="ssn34">####</label>
 						</span>
