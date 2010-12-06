@@ -27,8 +27,8 @@
 
 	<bean id="mfaConfiguration" class="edu.gatech.mfa.core.MFAConfiguration">
 		<property name="dataSource" ref="dbDataSource"></property>
-		<property name="failureController" ref="failureController"></property>
-		<property name="successController" ref="successController"></property>
+		<property name="failureController" ref="unsuccessfulLoginAttempt"></property>
+		<property name="successController" ref="displayProfileController"></property>
 		<property name="extension" ref="qrCodeMobileExtension"></property>
 	</bean>
 
@@ -45,7 +45,7 @@
 	</bean>
 
 	<bean id="requestInterceptor" class="edu.gatech.mfa.interceptor.RestrictedAccessInterceptor">
-		<property name="redirectURLInCaseOfRestrictedAccess" value="../login1.html"></property>
+		<property name="redirectURLInCaseOfRestrictedAccess" value="../login_mobile.html"></property>
 	</bean>
 
 	<bean id="urlMappings"
@@ -55,6 +55,7 @@
 			<props>
 				<prop key="checkUser">frontController</prop>
 				<prop key="mfaAuth">authController</prop>
+				<prop key="logoutAction">logoutController</prop> <!--  -->
 			</props>
 		</property>
 	</bean>
@@ -71,6 +72,7 @@
 		<property name="mappings">
 			<props>
 				<prop key="home.app">userController</prop>
+				<prop key="updateProfile">updateProfileController</prop> <!--  -->
 			</props>
 		</property>
 	</bean>
@@ -98,4 +100,31 @@
 	<bean id="dbDataSource" class="edu.gatech.mfa.test.DbDataSource" init-method="init">
 		<property name="dataSource" ref="basicDataSource"></property>
 	</bean>
+	
+	<!--  -->
+	<bean id="logoutController" class="com.profile.app.LogoutController" init-method="init">
+		<property name="templateName" value="logout.vm"></property>
+		<property name="velocityFactory" ref="velocityFactory"></property>
+	</bean>
+	
+	<bean id="displayProfileController" class="com.profile.app.DisplayProfileController" init-method="init">
+		<property name="displayProfileTemplateFile" value="user_profile.vm"></property>
+		<property name="velocityFactory" ref="velocityFactory"></property>
+		<property name="profileDAO" ref="profileDAO"></property>
+	</bean>
+	
+	<bean id="updateProfileController" class="com.profile.app.UpdateProfileController" init-method="init">
+		<property name="updateProfileTemplateFile" value="updateProfile.vm"></property>
+		<property name="velocityFactory" ref="velocityFactory"></property>
+		<property name="profileDAO" ref="profileDAO"></property>
+	</bean>
+	
+	<bean id="profileDAO" class="com.profile.app.db.ProfileDAO" init-method="init">
+		<property name="dataSource" ref="basicDataSource"></property>
+	 </bean>
+	 
+	 <bean id="unsuccessfulLoginAttempt" class="com.profile.app.UnsuccessfulLoginController" init-method="init" >
+	 	<property name="templateFile" value="wrongUsernamePassword.vm"></property>
+	 	<property name="velocityFactory" ref="velocityFactory"></property>
+	 </bean>
 </beans>

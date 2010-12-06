@@ -128,5 +128,5 @@ function getquerystring() {
 
 function updatepage(str){
    // document.getElementById("result").innerHTML = str;
-	alert('Response from the server ' + str);
+	alert('Profile Updated!!');
 }

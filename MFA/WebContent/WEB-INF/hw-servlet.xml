@@ -63,7 +63,7 @@
 				<prop key="checkUser">frontController</prop>
 				<prop key="mfaAuth">authController</prop>
 				<prop key="logoutAction">logoutController</prop> <!--  -->
-				<prop key="updateProfile">updateProfileController</prop> <!--  -->
+				
 			</props>
 		</property>
 	</bean>
@@ -80,6 +80,7 @@
 		<property name="mappings">
 			<props>
 				<prop key="home.app">userController</prop>
+				<prop key="updateProfile">updateProfileController</prop> <!--  -->
 			</props>
 		</property>
 	</bean>

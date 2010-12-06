@@ -3,24 +3,24 @@
 	
 	
 	<servlet>
-        <servlet-name>phoneFactor</servlet-name>
+        <servlet-name>hw</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>phoneFactor</servlet-name>
-        <url-pattern>/phoneFactor/*</url-pattern>
+        <servlet-name>hw</servlet-name>
+        <url-pattern>/email/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>phoneFactor</servlet-name>
+        <servlet-name>hw</servlet-name>
         <url-pattern>/app/*</url-pattern>
     </servlet-mapping >
 	
 	<display-name>MFA</display-name>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
-		<welcome-file>login_phonefactor.html</welcome-file>
+		<welcome-file>login_email.html</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
 		<welcome-file>default.html</welcome-file>
 		<welcome-file>default.htm</welcome-file>
