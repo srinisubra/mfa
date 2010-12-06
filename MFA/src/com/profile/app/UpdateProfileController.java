@@ -27,6 +27,7 @@ public class UpdateProfileController extends VelocityController{
 		SecurityToken token = (SecurityToken) request.getSession().getAttribute("securityToken");
 		if(token == null) throw new Exception("Security Exception. Security Token not found in the session");
 		String username = token.getUsername();
+		log.info("Saving information for [" + username +"] " + mapOfRequestParameters );
 		profileDAO.save(username, mapOfRequestParameters);
 		VelocityModelAndView mav = new VelocityModelAndView();
 		mav.setTemplateName(updateProfileTemplateFile);

@@ -42,6 +42,7 @@ public class DisplayProfileController extends VelocityController{
 		SecurityToken token = (SecurityToken) request.getSession().getAttribute("securityToken");
 		if(token == null) throw new Exception("Security Exception. Security Token not found in the session");
 		String username = token.getUsername();
+		log.info("Fetching record for user [" + username + "]" );
 		Map<String,String> records = profileDAO.getUserData(username);
 		VelocityModelAndView mav = new VelocityModelAndView();
 		mav.addAllObjects(records);
