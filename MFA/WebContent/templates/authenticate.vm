@@ -7,6 +7,9 @@
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <script type="text/javascript" src="../templates/auth.js"></script>
+<!-- CSS -->
+<link rel="stylesheet" href="../css/structure.css" type="text/css" />
+<link rel="stylesheet" href="../css/form.css" type="text/css" />
 <link href="../style.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 <body>
@@ -16,8 +19,6 @@
 <div id="menu">
 	<ul>
 		<li class="first"><a href="#">Home</a></li>
-		<li><a href="#">Products</a></li>
-		<li><a href="#">Services</a></li>
 		<li><a href="#">About Us</a></li>
 		<li><a href="#">Contact Us</a></li>
 	</ul>
@@ -27,19 +28,16 @@
 		<div id="page-bottom">
 		<div>
 			<div id="sidebar">
-				<h2>News and Updates</h2>
-				<ul>
-					<li>Consectetuer adipiscing elit. Nam pede erat, porta eu, lobortis eget, tempus et, tellus. Etiam neque. Vivamus consequat lorem at nisl.</li>
-					<li>Nullam non wisi a sem semper eleifend. Donec mattis libero eget urna. Duis pretium velit ac mauris. Proin eu wisi suscipit nulla suscipit interdum.</li>
-				</ul>
+				<h2><a href="logoutAction">Logout</a></h2>
+				
 			</div>
 			<div id="content">
 				<h2>Please authenticate as instructed below:</h2>
 					<form action="mfaAuth" method="post" name="authForm">
 					<ul>
-						<li>Enter your password <input type="password" name="password" /></li>
-						<li>Enter the token emailed to you <input name="token" type="text" /></li>
-						<li><input type="button" value="submit" onClick="submitForm()" /></li>
+						<li id="foli0">Enter your password <input type="password" name="password" /></li>
+						<li id="foli1">Enter the token emailed to you <input name="token" type="text" /></li>
+						<li id="foli2"><input type="button" value="submit" onClick="submitForm()" /></li>
 						
 						<input type="hidden" name="salt" value="$salt" />
 						<input type="hidden" name="requestId" value="$requestId" />	
@@ -52,7 +50,7 @@
 	</div>
 </div>
 <div id="footer">
-	<p>Copyright © 2006 Sitename.com. Template Designed by <a href="http://www.thewebhub.com">TheWebHub.com</a>.</p>
+	<p>Copyright © 2010 Designed by Amay Singhal & Nadir Saghar.</p>
 </div>
 </body>
 </html>

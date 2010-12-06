@@ -1,6 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<!-- Template Design by TheWebhub.com | http://www.thewebhub.com | Released for free under a Creative Commons Attribution-Share Alike 3.0 Philippines -->
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>MFA Service Demo</title>
@@ -36,7 +35,7 @@
 	</div>
 </div>
 <div id="footer">
-	<p>Copyright © 2006 Sitename.com. Template Designed by <a href="http://www.thewebhub.com">TheWebHub.com</a>.</p>
+	<p>Copyright © 2010 Designed by Amay Singhal & Nadir Saghar.</p>
 </div>
 </body>
 </html>

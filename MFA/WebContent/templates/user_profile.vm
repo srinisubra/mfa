@@ -35,11 +35,7 @@ display:none;
 		<div id="page-bottom">
 		<div>
 			<div id="sidebar">
-				<h2>News and Updates</h2>
-				<ul>
-					<li>Consectetuer adipiscing elit. Nam pede erat, porta eu, lobortis eget, tempus et, tellus. Etiam neque. Vivamus consequat lorem at nisl.</li>
-					<li>Nullam non wisi a sem semper eleifend. Donec mattis libero eget urna. Duis pretium velit ac mauris. Proin eu wisi suscipit nulla suscipit interdum.</li>
-				</ul>
+				<h2><a href="logoutAction">Logout</a></h2>
 			</div>
 			<div id="content">
 				<h2>Profile Details</h2>
@@ -458,7 +454,7 @@ display:none;
 	</div>
 </div>
 <div id="footer">
-	<p>Copyright Â© 2006 Sitename.com. Template Designed by <a href="http://www.thewebhub.com">TheWebHub.com</a>.</p>
+<p>Copyright © 2010 Template Designed by Amay Singhal & Nadir Saghar</a>.</p>
 </div>
 </body>
 </html>
