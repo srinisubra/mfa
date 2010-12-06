@@ -64,14 +64,14 @@ public class DbDataSource implements MFADataSource {
 
 	@Override
 	public String getMobileNumber(String username) throws Exception {
-		Map<String,Object>  record = template.queryForMap("select b.* from user_credentials as a,user_details as b where a.user_name = ? and a.user_id = b.id", new Object[]{username});
+		Map<String,Object>  record = template.queryForMap("select * from user_details where user_name = ?", new Object[]{username});
 		String mobile = record.get("phone_no").toString();
 		return mobile;
 	}
 
 	@Override
 	public String getEmailId(String username) throws Exception {
-		Map<String,Object>  record = template.queryForMap("select b.* from user_credentials as a,user_details as b where a.user_name = ? and a.user_id = b.id", new Object[]{username});
+		Map<String,Object>  record = template.queryForMap("select * from user_details where user_name = ?", new Object[]{username});
 		String email = record.get("email_id").toString();
 		return email;
 	}
